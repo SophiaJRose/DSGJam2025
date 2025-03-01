@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://uewd66uc1sy0"]
+[gd_scene load_steps=26 format=3 uid="uid://uewd66uc1sy0"]
 
 [ext_resource type="PackedScene" uid="uid://bhj0qd6vawlhp" path="res://scenes/player.tscn" id="1_pat0x"]
 [ext_resource type="Script" path="res://scenes/rotating_splitscreen.gd" id="1_tvbdr"]
@@ -78,6 +78,9 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_bkahd"]
 material = SubResource("StandardMaterial3D_6gjq6")
 size = Vector3(3.2, 72, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mdj77"]
+size = Vector3(160, 60, 3.2)
 
 [node name="Root" type="Node"]
 
@@ -182,12 +185,12 @@ mesh = SubResource("BoxMesh_bkahd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="PlayerA" parent="Level" instance=ExtResource("1_pat0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 4.8, -1.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 4.8, -1.6)
 player_slot = 1
 device_id = 0
 
 [node name="PlayerB" parent="Level" instance=ExtResource("1_pat0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 4.8, -1.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 352, 4.8, -1.6)
 player_slot = 2
 device_id = 1
 
@@ -225,6 +228,15 @@ projection = 1
 current = true
 size = 80.0
 
+[node name="WorldRotationAreaB" type="Area3D" parent="CanvasLayer/RotatingSplitscreen/TopScreenContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -1.6)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+shape = SubResource("BoxShape3D_mdj77")
+
 [node name="BottomScreenContainer" type="SubViewportContainer" parent="CanvasLayer/RotatingSplitscreen"]
 layout_mode = 1
 anchors_preset = -1
@@ -246,3 +258,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 36, 100)
 v_offset = -40.0
 projection = 1
 size = 80.0
+
+[node name="WorldRotationAreaA" type="Area3D" parent="CanvasLayer/RotatingSplitscreen/BottomScreenContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 36, -1.6)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/WorldRotationAreaA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+shape = SubResource("BoxShape3D_mdj77")
+
+[connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_entered"]
+[connection signal="body_exited" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_exited"]
+[connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/WorldRotationAreaA" to="Level/PlayerB" method="_on_world_rotation_area_entered"]
+[connection signal="body_exited" from="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/WorldRotationAreaA" to="Level/PlayerB" method="_on_world_rotation_area_exited"]

@@ -2,15 +2,20 @@ extends CharacterBody3D
 
 @export var player_slot: int = -1
 @export var device_id: int = -1
-@onready var jump_action = "Jump P%s" % player_slot
-@onready var left_action = "Left P%s" % player_slot
-@onready var right_action = "Right P%s" % player_slot
+
+var vulnerable: bool = false
 
 const SPEED = 32.0
 const JUMP_VELOCITY = 64.0
 const gravity = 128.0
+const copy_offsets = [256, -256]
 
 @onready var animations = $AnimatedSprite3D
+@onready var copy = $Copy
+@onready var copyAnimations = $Copy/AnimatedSprite3D
+@onready var jump_action = "Jump P%s" % player_slot
+@onready var left_action = "Left P%s" % player_slot
+@onready var right_action = "Right P%s" % player_slot
 
 func _ready() -> void:
 	pass
@@ -30,9 +35,20 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		animations.scale.x = -sign(direction)
-		animations.play("Walk P%s" % player_slot)
+		#print(("Walk P%s Vuln" if vulnerable else "Walk P%s") % player_slot)
+		animations.play(("Walk P%s Vuln" if vulnerable else "Walk P%s") % player_slot)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		animations.play("Stand P%s" % player_slot)
+		animations.play(("Stand P%s Vuln" if vulnerable else "Stand P%s") % player_slot)
 
 	move_and_slide()
+	copy.global_position = Vector3(position.x + copy_offsets[player_slot-1], position.y, position.z)
+	copyAnimations.play(animations.animation)
+	copyAnimations.scale.x = animations.scale.x
+
+
+func _on_world_rotation_area_entered(area):
+	vulnerable = true
+
+func _on_world_rotation_area_exited(area):
+	vulnerable = false
