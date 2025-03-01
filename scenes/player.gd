@@ -6,8 +6,8 @@ extends CharacterBody3D
 var vulnerable: bool = false
 
 const SPEED = 32.0
-const JUMP_VELOCITY = 64.0
-const gravity = 128.0
+const JUMP_VELOCITY = 48.0
+const gravity = 112.0
 const copy_offsets = [256, -256]
 
 @onready var animations = $AnimatedSprite3D

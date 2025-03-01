@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c1bkkgm7h0djc" path="res://assets/P2Frame2VulnPLACEHOLDER.png" id="9_8w55w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k52rf"]
-size = Vector3(3.2, 3.2, 3.2)
+size = Vector3(4.8, 4.8, 4.8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c6dyv"]
 animations = [{
@@ -101,17 +101,17 @@ script = ExtResource("1_qq1mo")
 shape = SubResource("BoxShape3D_k52rf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-pixel_size = 0.1333
+pixel_size = 0.2
 sprite_frames = SubResource("SpriteFrames_c6dyv")
 animation = &"Stand P1"
 
 [node name="Copy" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.8)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Copy"]
 shape = SubResource("BoxShape3D_k52rf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Copy"]
-pixel_size = 0.1333
+pixel_size = 0.2
 sprite_frames = SubResource("SpriteFrames_c6dyv")
 animation = &"Stand P1"
