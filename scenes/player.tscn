@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhj0qd6vawlhp"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_qq1mo"]
+[ext_resource type="Texture2D" uid="uid://cacxl40u84t7c" path="res://assets/P1Frame1PLACEHOLDER.png" id="1_vevn8"]
+[ext_resource type="Texture2D" uid="uid://dqpmxne68fx7u" path="res://assets/P1Frame2PLACEHOLDER.png" id="2_3aout"]
+[ext_resource type="Texture2D" uid="uid://cqvopdb1ddklq" path="res://assets/P2Frame1PLACEHOLDER.png" id="3_vt465"]
+[ext_resource type="Texture2D" uid="uid://dvmgn3kab3dr6" path="res://assets/P2Frame2PLAERCHOLDER.png" id="5_i5ebn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k52rf"]
+size = Vector3(3.2, 3.2, 3.2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6dyv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vevn8")
+}],
+"loop": true,
+"name": &"Stand P1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vt465")
+}],
+"loop": true,
+"name": &"Stand P2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vevn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3aout")
+}],
+"loop": true,
+"name": &"Walk P1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vt465")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i5ebn")
+}],
+"loop": true,
+"name": &"Walk P2",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_qq1mo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_k52rf")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.1333
+sprite_frames = SubResource("SpriteFrames_c6dyv")
+animation = &"Stand P1"

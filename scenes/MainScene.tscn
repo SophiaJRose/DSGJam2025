@@ -1,10 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://uewd66uc1sy0"]
+[gd_scene load_steps=25 format=3 uid="uid://uewd66uc1sy0"]
 
+[ext_resource type="PackedScene" uid="uid://bhj0qd6vawlhp" path="res://scenes/player.tscn" id="1_pat0x"]
 [ext_resource type="Script" path="res://scenes/rotating_splitscreen.gd" id="1_tvbdr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlu3f"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_8atig"]
+size = Vector3(128, 3.2, 3.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roc2p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oca0e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mj4k2"]
+material = SubResource("StandardMaterial3D_oca0e")
+size = Vector3(128, 3.2, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m02ts"]
+size = Vector3(3.2, 72, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_estue"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h706r"]
+material = SubResource("StandardMaterial3D_estue")
+size = Vector3(3.2, 72, 3.2)
 
 [sub_resource type="Gradient" id="Gradient_8wnvm"]
 colors = PackedColorArray(0.501961, 0, 1, 1, 0.501961, 1, 1, 1)
@@ -21,18 +36,6 @@ albedo_texture = SubResource("GradientTexture2D_jnopy")
 material = SubResource("StandardMaterial3D_hv85v")
 size = Vector2(128, 72)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uevo6"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m45ys"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3imjg"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh6g1"]
-albedo_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Gradient" id="Gradient_axpul"]
 colors = PackedColorArray(1, 0.501961, 0, 1, 1, 0, 0, 1)
 
@@ -48,6 +51,34 @@ albedo_texture = SubResource("GradientTexture2D_4pg20")
 material = SubResource("StandardMaterial3D_wq0gl")
 size = Vector2(128, 72)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_goyvy"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rbm12"]
+material = SubResource("StandardMaterial3D_goyvy")
+size = Vector3(128, 3.2, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37qs7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ph87"]
+material = SubResource("StandardMaterial3D_37qs7")
+size = Vector3(128, 3.2, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yb8nd"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fh2s1"]
+material = SubResource("StandardMaterial3D_yb8nd")
+size = Vector3(3.2, 72, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gjq6"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bkahd"]
+material = SubResource("StandardMaterial3D_6gjq6")
+size = Vector3(3.2, 72, 3.2)
+
 [node name="Root" type="Node"]
 
 [node name="Level" type="Node3D" parent="."]
@@ -56,28 +87,44 @@ size = Vector2(128, 72)
 
 [node name="Geometry" type="Node3D" parent="Level/WorldA"]
 
-[node name="Floor" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+[node name="Floor" type="StaticBody3D" parent="Level/WorldA/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 1.6, -1.6)
-size = Vector3(128, 3.2, 3.2)
-material = SubResource("StandardMaterial3D_tlu3f")
 
-[node name="Ceiling" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldA/Geometry/Floor"]
+shape = SubResource("BoxShape3D_8atig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldA/Geometry/Floor"]
+mesh = SubResource("BoxMesh_mj4k2")
+
+[node name="Ceiling" type="StaticBody3D" parent="Level/WorldA/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 70.4, -1.6)
-size = Vector3(128, 3.2, 3.2)
-material = SubResource("StandardMaterial3D_tlu3f")
 
-[node name="LeftWall" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldA/Geometry/Ceiling"]
+shape = SubResource("BoxShape3D_8atig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldA/Geometry/Ceiling"]
+mesh = SubResource("BoxMesh_mj4k2")
+
+[node name="LeftWall" type="StaticBody3D" parent="Level/WorldA/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 36, -1.6)
-size = Vector3(3.2, 72, 3.2)
-material = SubResource("StandardMaterial3D_roc2p")
 
-[node name="RightWall" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldA/Geometry/LeftWall"]
+shape = SubResource("BoxShape3D_m02ts")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldA/Geometry/LeftWall"]
+mesh = SubResource("BoxMesh_h706r")
+
+[node name="RightWall" type="StaticBody3D" parent="Level/WorldA/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.4, 36, -1.6)
-size = Vector3(3.2, 72, 3.2)
-material = SubResource("StandardMaterial3D_roc2p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldA/Geometry/RightWall"]
+shape = SubResource("BoxShape3D_m02ts")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldA/Geometry/RightWall"]
+mesh = SubResource("BoxMesh_h706r")
 
 [node name="Background" type="MeshInstance3D" parent="Level/WorldA"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -4)
 mesh = SubResource("QuadMesh_hd1bt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level/WorldA"]
@@ -86,37 +133,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 30)
 [node name="WorldB" type="Node3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 0, 0)
 
-[node name="Geometry" type="Node3D" parent="Level/WorldB"]
-
-[node name="Floor" type="CSGBox3D" parent="Level/WorldB/Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 1.6, -1.6)
-size = Vector3(128, 3.2, 3.2)
-material = SubResource("StandardMaterial3D_uevo6")
-
-[node name="Ceiling" type="CSGBox3D" parent="Level/WorldB/Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 70.4, -1.6)
-size = Vector3(128, 3.2, 3.2)
-material = SubResource("StandardMaterial3D_m45ys")
-
-[node name="LeftWall" type="CSGBox3D" parent="Level/WorldB/Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 36, -1.6)
-size = Vector3(3.2, 72, 3.2)
-material = SubResource("StandardMaterial3D_3imjg")
-
-[node name="RightWall" type="CSGBox3D" parent="Level/WorldB/Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.4, 36, -1.6)
-size = Vector3(3.2, 72, 3.2)
-material = SubResource("StandardMaterial3D_yh6g1")
-
 [node name="Background" type="MeshInstance3D" parent="Level/WorldB"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -4)
 mesh = SubResource("QuadMesh_jja17")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level/WorldB"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 30)
 
+[node name="Geometry" type="Node3D" parent="Level/WorldB"]
+
+[node name="Floor" type="StaticBody3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 1.6, -1.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldB/Geometry/Floor"]
+shape = SubResource("BoxShape3D_8atig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldB/Geometry/Floor"]
+mesh = SubResource("BoxMesh_rbm12")
+
+[node name="Ceiling" type="StaticBody3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 70.4, -1.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldB/Geometry/Ceiling"]
+shape = SubResource("BoxShape3D_8atig")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldB/Geometry/Ceiling"]
+mesh = SubResource("BoxMesh_1ph87")
+
+[node name="LeftWall" type="StaticBody3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 36, -1.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldB/Geometry/LeftWall"]
+shape = SubResource("BoxShape3D_m02ts")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldB/Geometry/LeftWall"]
+mesh = SubResource("BoxMesh_fh2s1")
+
+[node name="RightWall" type="StaticBody3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.4, 36, -1.6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/WorldB/Geometry/RightWall"]
+shape = SubResource("BoxShape3D_m02ts")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/WorldB/Geometry/RightWall"]
+mesh = SubResource("BoxMesh_bkahd")
+
 [node name="DummyCamera" type="Camera3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PlayerA" parent="Level" instance=ExtResource("1_pat0x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 4.8, -1.6)
+player_slot = 1
+device_id = 0
+
+[node name="PlayerB" parent="Level" instance=ExtResource("1_pat0x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 4.8, -1.6)
+player_slot = 2
+device_id = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -10,5 +10,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	rotation += 1.0 * delta
 	topCam.rotation.z = -rotation
 	bottomCam.rotation.z = -rotation
