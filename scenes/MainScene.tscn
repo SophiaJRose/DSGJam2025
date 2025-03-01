@@ -1,0 +1,175 @@
+[gd_scene load_steps=16 format=3 uid="uid://uewd66uc1sy0"]
+
+[ext_resource type="Script" path="res://scenes/rotating_splitscreen.gd" id="1_tvbdr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlu3f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roc2p"]
+
+[sub_resource type="Gradient" id="Gradient_8wnvm"]
+colors = PackedColorArray(0.501961, 0, 1, 1, 0.501961, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jnopy"]
+gradient = SubResource("Gradient_8wnvm")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hv85v"]
+albedo_texture = SubResource("GradientTexture2D_jnopy")
+
+[sub_resource type="QuadMesh" id="QuadMesh_hd1bt"]
+material = SubResource("StandardMaterial3D_hv85v")
+size = Vector2(128, 72)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uevo6"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m45ys"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3imjg"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yh6g1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_axpul"]
+colors = PackedColorArray(1, 0.501961, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4pg20"]
+gradient = SubResource("Gradient_axpul")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wq0gl"]
+albedo_texture = SubResource("GradientTexture2D_4pg20")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jja17"]
+material = SubResource("StandardMaterial3D_wq0gl")
+size = Vector2(128, 72)
+
+[node name="Root" type="Node"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="WorldA" type="Node3D" parent="Level"]
+
+[node name="Geometry" type="Node3D" parent="Level/WorldA"]
+
+[node name="Floor" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 1.6, -1.6)
+size = Vector3(128, 3.2, 3.2)
+material = SubResource("StandardMaterial3D_tlu3f")
+
+[node name="Ceiling" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 70.4, -1.6)
+size = Vector3(128, 3.2, 3.2)
+material = SubResource("StandardMaterial3D_tlu3f")
+
+[node name="LeftWall" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 36, -1.6)
+size = Vector3(3.2, 72, 3.2)
+material = SubResource("StandardMaterial3D_roc2p")
+
+[node name="RightWall" type="CSGBox3D" parent="Level/WorldA/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.4, 36, -1.6)
+size = Vector3(3.2, 72, 3.2)
+material = SubResource("StandardMaterial3D_roc2p")
+
+[node name="Background" type="MeshInstance3D" parent="Level/WorldA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -2)
+mesh = SubResource("QuadMesh_hd1bt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level/WorldA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 30)
+
+[node name="WorldB" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 0, 0)
+
+[node name="Geometry" type="Node3D" parent="Level/WorldB"]
+
+[node name="Floor" type="CSGBox3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 1.6, -1.6)
+size = Vector3(128, 3.2, 3.2)
+material = SubResource("StandardMaterial3D_uevo6")
+
+[node name="Ceiling" type="CSGBox3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 70.4, -1.6)
+size = Vector3(128, 3.2, 3.2)
+material = SubResource("StandardMaterial3D_m45ys")
+
+[node name="LeftWall" type="CSGBox3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 36, -1.6)
+size = Vector3(3.2, 72, 3.2)
+material = SubResource("StandardMaterial3D_3imjg")
+
+[node name="RightWall" type="CSGBox3D" parent="Level/WorldB/Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.4, 36, -1.6)
+size = Vector3(3.2, 72, 3.2)
+material = SubResource("StandardMaterial3D_yh6g1")
+
+[node name="Background" type="MeshInstance3D" parent="Level/WorldB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -2)
+mesh = SubResource("QuadMesh_jja17")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level/WorldB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 30)
+
+[node name="DummyCamera" type="Camera3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RotatingSplitscreen" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+script = ExtResource("1_tvbdr")
+
+[node name="TopScreenContainer" type="SubViewportContainer" parent="CanvasLayer/RotatingSplitscreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -440.0
+offset_right = 360.0
+stretch = true
+
+[node name="TopScreenViewport" type="SubViewport" parent="CanvasLayer/RotatingSplitscreen/TopScreenContainer"]
+handle_input_locally = false
+size = Vector2i(2000, 800)
+render_target_update_mode = 4
+
+[node name="TopScreenCam" type="Camera3D" parent="CanvasLayer/RotatingSplitscreen/TopScreenContainer/TopScreenViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 80)
+v_offset = 40.0
+projection = 1
+current = true
+size = 80.0
+
+[node name="BottomScreenContainer" type="SubViewportContainer" parent="CanvasLayer/RotatingSplitscreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = 360.0
+offset_right = 360.0
+offset_bottom = 800.0
+stretch = true
+
+[node name="BottomScreenViewport" type="SubViewport" parent="CanvasLayer/RotatingSplitscreen/BottomScreenContainer"]
+handle_input_locally = false
+size = Vector2i(2000, 800)
+render_target_update_mode = 4
+
+[node name="BottomScreenCam" type="Camera3D" parent="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/BottomScreenViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 36, 100)
+v_offset = -40.0
+projection = 1
+size = 80.0
