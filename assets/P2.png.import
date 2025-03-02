@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvmgn3kab3dr6"
-path="res://.godot/imported/P2Frame2PLACEHOLDER.png-751e5b987d083c29c37214bb53ef2411.ctex"
+uid="uid://c2ufwhs0v25si"
+path="res://.godot/imported/P2.png-af6dd4a35540302aa02db8233a40e389.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/P2Frame2PLACEHOLDER.png"
-dest_files=["res://.godot/imported/P2Frame2PLACEHOLDER.png-751e5b987d083c29c37214bb53ef2411.ctex"]
+source_file="res://assets/P2.png"
+dest_files=["res://.godot/imported/P2.png-af6dd4a35540302aa02db8233a40e389.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

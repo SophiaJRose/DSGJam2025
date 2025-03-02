@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ijam7tsktfm"
-path.s3tc="res://.godot/imported/P2Frame1VulnPLACEHOLDER.png-4f67a995d7e4ebb2a3cb1293b37d3919.s3tc.ctex"
+uid="uid://clrylqkokvavy"
+path="res://.godot/imported/P2Vuln.png-17ca559243e4da38a986454c4c0b5ad7.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/P2Frame1VulnPLACEHOLDER.png"
-dest_files=["res://.godot/imported/P2Frame1VulnPLACEHOLDER.png-4f67a995d7e4ebb2a3cb1293b37d3919.s3tc.ctex"]
+source_file="res://assets/P2Vuln.png"
+dest_files=["res://.godot/imported/P2Vuln.png-17ca559243e4da38a986454c4c0b5ad7.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

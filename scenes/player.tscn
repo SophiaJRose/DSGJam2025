@@ -1,14 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhj0qd6vawlhp"]
+[gd_scene load_steps=12 format=3 uid="uid://bhj0qd6vawlhp"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_qq1mo"]
-[ext_resource type="Texture2D" uid="uid://cacxl40u84t7c" path="res://assets/P1Frame1PLACEHOLDER.png" id="1_vevn8"]
-[ext_resource type="Texture2D" uid="uid://dqpmxne68fx7u" path="res://assets/P1Frame2PLACEHOLDER.png" id="2_3aout"]
-[ext_resource type="Texture2D" uid="uid://cqvopdb1ddklq" path="res://assets/P2Frame1PLACEHOLDER.png" id="3_vt465"]
-[ext_resource type="Texture2D" uid="uid://ng3asee7r40e" path="res://assets/P1Frame1VulnPLACEHOLDER.png" id="4_ro42o"]
-[ext_resource type="Texture2D" uid="uid://dvmgn3kab3dr6" path="res://assets/P2Frame2PLACEHOLDER.png" id="5_i5ebn"]
-[ext_resource type="Texture2D" uid="uid://b7ijam7tsktfm" path="res://assets/P2Frame1VulnPLACEHOLDER.png" id="5_id1kq"]
-[ext_resource type="Texture2D" uid="uid://dyc5tfs13ooes" path="res://assets/P1Frame2VulnPLACEHOLDER.png" id="7_i23b0"]
-[ext_resource type="Texture2D" uid="uid://c1bkkgm7h0djc" path="res://assets/P2Frame2VulnPLACEHOLDER.png" id="9_8w55w"]
+[ext_resource type="Texture2D" uid="uid://iod4s3buljab" path="res://assets/P1.png" id="2_hpi2g"]
+[ext_resource type="Texture2D" uid="uid://dt1hspr88k4ym" path="res://assets/P1Vuln.png" id="3_t1vvx"]
+[ext_resource type="Texture2D" uid="uid://c2ufwhs0v25si" path="res://assets/P2.png" id="4_01233"]
+[ext_resource type="Texture2D" uid="uid://clrylqkokvavy" path="res://assets/P2Vuln.png" id="5_jgci7"]
 [ext_resource type="Texture2D" uid="uid://brrnvxg8ckow2" path="res://assets/P1Sword.png" id="10_u30qb"]
 [ext_resource type="Texture2D" uid="uid://dukh6str1g1p2" path="res://assets/P2Sword.png" id="11_lmrfe"]
 
@@ -19,7 +15,7 @@ size = Vector3(4.8, 4.8, 4.8)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vevn8")
+"texture": ExtResource("2_hpi2g")
 }],
 "loop": true,
 "name": &"Stand P1",
@@ -27,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ro42o")
+"texture": ExtResource("3_t1vvx")
 }],
 "loop": true,
 "name": &"Stand P1 Vuln",
@@ -35,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_vt465")
+"texture": ExtResource("4_01233")
 }],
 "loop": true,
 "name": &"Stand P2",
@@ -43,54 +39,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_id1kq")
+"texture": ExtResource("5_jgci7")
 }],
 "loop": true,
 "name": &"Stand P2 Vuln",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_vevn8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_3aout")
-}],
-"loop": true,
-"name": &"Walk P1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_ro42o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_i23b0")
-}],
-"loop": true,
-"name": &"Walk P1 Vuln",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_vt465")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_i5ebn")
-}],
-"loop": true,
-"name": &"Walk P2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_id1kq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_8w55w")
-}],
-"loop": true,
-"name": &"Walk P2 Vuln",
 "speed": 5.0
 }]
 
@@ -130,11 +82,12 @@ shape = SubResource("BoxShape3D_k52rf")
 shape = SubResource("BoxShape3D_k52rf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-pixel_size = 0.2
+pixel_size = 0.1
 sprite_frames = SubResource("SpriteFrames_c6dyv")
 animation = &"Stand P1"
 
 [node name="Sword" type="Node3D" parent="." groups=["Sword"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
 
 [node name="SwordArea" type="Area3D" parent="Sword" groups=["Sword"]]
@@ -160,11 +113,12 @@ shape = SubResource("BoxShape3D_k52rf")
 shape = SubResource("BoxShape3D_k52rf")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Copy"]
-pixel_size = 0.2
+pixel_size = 0.1
 sprite_frames = SubResource("SpriteFrames_c6dyv")
 animation = &"Stand P1"
 
 [node name="SwordCopy" type="Node3D" parent="Copy"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
 
 [node name="SwordArea" type="Area3D" parent="Copy/SwordCopy"]

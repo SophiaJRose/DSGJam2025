@@ -65,6 +65,8 @@ func _physics_process(delta: float) -> void:
 			sword.visible = false
 			swordCopy.visible = false
 			sword_end_timer = 0
+			sword.rotation.y = deg_to_rad(90)
+			swordCopy.rotation.y = deg_to_rad(90)
 	# Handle jump and gravity
 	if Input.is_action_just_pressed(jump_action) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -78,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		animations.scale.x = -sign(direction)
-		animations.play(("Walk P%s Vuln" if vulnerable else "Walk P%s") % player_slot)
+		#animations.play(("Walk P%s Vuln" if vulnerable else "Walk P%s") % player_slot)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		animations.play(("Stand P%s Vuln" if vulnerable else "Stand P%s") % player_slot)
