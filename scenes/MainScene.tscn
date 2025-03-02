@@ -185,6 +185,7 @@ size = Vector3(160, 60, 3.2)
 [node name="Level" type="Node3D" parent="."]
 
 [node name="WorldA" type="Node3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
 
 [node name="Geometry" type="Node3D" parent="Level/WorldA"]
 
@@ -326,7 +327,7 @@ mesh = SubResource("QuadMesh_hd1bt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, 30)
 
 [node name="WorldB" type="Node3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 0, -1.6)
 
 [node name="Background" type="MeshInstance3D" parent="Level/WorldB"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 36, -4)
@@ -470,12 +471,12 @@ mesh = SubResource("BoxMesh_auoni")
 [node name="DummyCamera" type="Camera3D" parent="Level"]
 
 [node name="PlayerA" parent="Level" instance=ExtResource("1_pat0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 4.8, -1.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 64, -1.6)
 player_slot = 1
 device_id = 0
 
 [node name="PlayerB" parent="Level" instance=ExtResource("1_pat0x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 352, 4.8, -1.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320, 4.8, -1.6)
 player_slot = 2
 device_id = 1
 
