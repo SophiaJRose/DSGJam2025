@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-signal player_dead
+signal player_damage(player:int, health: int)
 
 @export var player_slot: int = -1
 @export var device_id: int = -1
@@ -96,6 +96,6 @@ func _on_world_rotation_area_exited(area):
 func _on_b_box_area_entered(area):
 	if area.is_in_group("Sword") and vulnerable:
 		health -= 1
+		player_damage.emit(player_slot, health)
 		if health == 0:
-			player_dead.emit()
 			queue_free()

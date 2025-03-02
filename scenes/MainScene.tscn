@@ -1,8 +1,13 @@
-[gd_scene load_steps=56 format=3 uid="uid://uewd66uc1sy0"]
+[gd_scene load_steps=64 format=3 uid="uid://uewd66uc1sy0"]
 
 [ext_resource type="PackedScene" uid="uid://bhj0qd6vawlhp" path="res://scenes/player.tscn" id="1_pat0x"]
 [ext_resource type="Script" path="res://scenes/rotating_splitscreen.gd" id="1_tvbdr"]
 [ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_ydy63"]
+[ext_resource type="Script" path="res://scenes/gui.gd" id="4_xgdbf"]
+[ext_resource type="Texture2D" uid="uid://dny1lsll1i3do" path="res://assets/P1Heart.png" id="5_hggdu"]
+[ext_resource type="Texture2D" uid="uid://dl7656s37m7du" path="res://assets/P2Heart.png" id="6_nay1g"]
+[ext_resource type="Texture2D" uid="uid://cbbvjfawm1j6f" path="res://assets/P1HeartEmpty.png" id="6_ybt3j"]
+[ext_resource type="Texture2D" uid="uid://da1snjifx5e1f" path="res://assets/P2HeartEmpty.png" id="7_obfpt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8atig"]
 size = Vector3(128, 3.2, 3.2)
@@ -181,10 +186,28 @@ size = Vector3(32, 3.2, 3.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mdj77"]
 size = Vector3(160, 60, 3.2)
 
+[sub_resource type="LabelSettings" id="LabelSettings_1xsht"]
+font_size = 48
+font_color = Color(0.501961, 0.752941, 1, 1)
+outline_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_142xi"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+outline_size = 8
+outline_color = Color(1, 0.25098, 0.12549, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_awxt6"]
+line_spacing = 24.0
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Root" type="Node"]
+process_mode = 3
 script = ExtResource("1_ydy63")
 
 [node name="Level" type="Node3D" parent="."]
+process_mode = 1
 
 [node name="WorldA" type="Node3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
@@ -483,6 +506,7 @@ player_slot = 2
 device_id = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 1
 
 [node name="RotatingSplitscreen" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -556,8 +580,148 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 shape = SubResource("BoxShape3D_mdj77")
 
-[connection signal="player_dead" from="Level/PlayerA" to="." method="_on_player_a_dead"]
-[connection signal="player_dead" from="Level/PlayerB" to="." method="_on_player_b_dead"]
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_xgdbf")
+
+[node name="P1WinText" type="Label" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player 1 Wins"
+label_settings = SubResource("LabelSettings_1xsht")
+
+[node name="P2WinText" type="Label" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player 2 Wins"
+label_settings = SubResource("LabelSettings_142xi")
+
+[node name="RetryOrQuit" type="Label" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Spacebar or Start to restart, or Escape or Select/Back to quit"
+label_settings = SubResource("LabelSettings_awxt6")
+
+[node name="P1HeartsEmpty" type="HBoxContainer" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 200.0
+offset_bottom = 96.0
+
+[node name="P1Heart1" type="TextureRect" parent="CanvasLayer/GUI/P1HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("6_ybt3j")
+
+[node name="P1Heart2" type="TextureRect" parent="CanvasLayer/GUI/P1HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("6_ybt3j")
+
+[node name="P1Heart3" type="TextureRect" parent="CanvasLayer/GUI/P1HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("6_ybt3j")
+
+[node name="P1Hearts" type="HBoxContainer" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 48.0
+offset_top = 48.0
+
+[node name="P1Heart1" type="TextureRect" parent="CanvasLayer/GUI/P1Hearts"]
+layout_mode = 2
+texture = ExtResource("5_hggdu")
+
+[node name="P1Heart2" type="TextureRect" parent="CanvasLayer/GUI/P1Hearts"]
+layout_mode = 2
+texture = ExtResource("5_hggdu")
+
+[node name="P1Heart3" type="TextureRect" parent="CanvasLayer/GUI/P1Hearts"]
+layout_mode = 2
+texture = ExtResource("5_hggdu")
+
+[node name="P2HeartsEmpty" type="HBoxContainer" parent="CanvasLayer/GUI"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = -1
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 200.0
+offset_bottom = 96.0
+alignment = 2
+
+[node name="P2Heart1" type="TextureRect" parent="CanvasLayer/GUI/P2HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("7_obfpt")
+
+[node name="P2Heart2" type="TextureRect" parent="CanvasLayer/GUI/P2HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("7_obfpt")
+
+[node name="P2Heart3" type="TextureRect" parent="CanvasLayer/GUI/P2HeartsEmpty"]
+layout_mode = 2
+texture = ExtResource("7_obfpt")
+
+[node name="P2Hearts" type="HBoxContainer" parent="CanvasLayer/GUI"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = -1
+offset_left = 48.0
+offset_top = 48.0
+alignment = 2
+
+[node name="P2Heart1" type="TextureRect" parent="CanvasLayer/GUI/P2Hearts"]
+layout_mode = 2
+texture = ExtResource("6_nay1g")
+
+[node name="P2Heart2" type="TextureRect" parent="CanvasLayer/GUI/P2Hearts"]
+layout_mode = 2
+texture = ExtResource("6_nay1g")
+
+[node name="P2Heart3" type="TextureRect" parent="CanvasLayer/GUI/P2Hearts"]
+layout_mode = 2
+texture = ExtResource("6_nay1g")
+
+[connection signal="player_win" from="." to="CanvasLayer/GUI" method="_on_root_player_win"]
+[connection signal="player_damage" from="Level/PlayerA" to="." method="_on_player_damage"]
+[connection signal="player_damage" from="Level/PlayerA" to="CanvasLayer/GUI" method="_on_player_damage"]
+[connection signal="player_damage" from="Level/PlayerB" to="." method="_on_player_damage"]
+[connection signal="player_damage" from="Level/PlayerB" to="CanvasLayer/GUI" method="_on_player_damage"]
 [connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_entered"]
 [connection signal="body_exited" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_exited"]
 [connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/WorldRotationAreaA" to="Level/PlayerB" method="_on_world_rotation_area_entered"]
