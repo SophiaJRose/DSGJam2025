@@ -55,7 +55,7 @@ func _unhandled_input(event):
 
 func _physics_process(delta: float) -> void:
 	# Handle sword movement
-	if sword.rotation.z > sword_end_angle:
+	if sword.rotation.z > sword_end_angle and sword_active:
 		sword.rotation.z -= deg_to_rad(10.5)
 		swordCopy.rotation.z -= deg_to_rad(10.5)
 	else:
