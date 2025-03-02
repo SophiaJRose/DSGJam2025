@@ -116,10 +116,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_qq1mo")
+
+[node name="BBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BBox"]
+shape = SubResource("BoxShape3D_k52rf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_k52rf")
@@ -129,8 +134,27 @@ pixel_size = 0.2
 sprite_frames = SubResource("SpriteFrames_c6dyv")
 animation = &"Stand P1"
 
+[node name="Sword" type="Node3D" parent="." groups=["Sword"]]
+visible = false
+
+[node name="SwordArea" type="Area3D" parent="Sword" groups=["Sword"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0, 0)
+
+[node name="SwordCollision" type="CollisionShape3D" parent="Sword/SwordArea"]
+shape = SubResource("BoxShape3D_s4rkf")
+
+[node name="SwordSprite" type="AnimatedSprite3D" parent="Sword/SwordArea"]
+pixel_size = 0.1
+sprite_frames = SubResource("SpriteFrames_h8b02")
+animation = &"P1"
+
 [node name="Copy" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.8)
+
+[node name="BBox" type="Area3D" parent="Copy"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Copy/BBox"]
+shape = SubResource("BoxShape3D_k52rf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Copy"]
 shape = SubResource("BoxShape3D_k52rf")
@@ -154,16 +178,5 @@ pixel_size = 0.1
 sprite_frames = SubResource("SpriteFrames_h8b02")
 animation = &"P1"
 
-[node name="Sword" type="Node3D" parent="."]
-visible = false
-
-[node name="SwordArea" type="Area3D" parent="Sword"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 0, 0)
-
-[node name="SwordCollision" type="CollisionShape3D" parent="Sword/SwordArea"]
-shape = SubResource("BoxShape3D_s4rkf")
-
-[node name="SwordSprite" type="AnimatedSprite3D" parent="Sword/SwordArea"]
-pixel_size = 0.1
-sprite_frames = SubResource("SpriteFrames_h8b02")
-animation = &"P1"
+[connection signal="area_entered" from="BBox" to="." method="_on_b_box_area_entered"]
+[connection signal="area_entered" from="Copy/BBox" to="." method="_on_b_box_area_entered"]

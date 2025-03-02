@@ -1,7 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://uewd66uc1sy0"]
+[gd_scene load_steps=56 format=3 uid="uid://uewd66uc1sy0"]
 
 [ext_resource type="PackedScene" uid="uid://bhj0qd6vawlhp" path="res://scenes/player.tscn" id="1_pat0x"]
 [ext_resource type="Script" path="res://scenes/rotating_splitscreen.gd" id="1_tvbdr"]
+[ext_resource type="Script" path="res://scenes/main_scene.gd" id="1_ydy63"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8atig"]
 size = Vector3(128, 3.2, 3.2)
@@ -181,6 +182,7 @@ size = Vector3(32, 3.2, 3.2)
 size = Vector3(160, 60, 3.2)
 
 [node name="Root" type="Node"]
+script = ExtResource("1_ydy63")
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -554,6 +556,8 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 shape = SubResource("BoxShape3D_mdj77")
 
+[connection signal="player_dead" from="Level/PlayerA" to="." method="_on_player_a_dead"]
+[connection signal="player_dead" from="Level/PlayerB" to="." method="_on_player_b_dead"]
 [connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_entered"]
 [connection signal="body_exited" from="CanvasLayer/RotatingSplitscreen/TopScreenContainer/WorldRotationAreaB" to="Level/PlayerA" method="_on_world_rotation_area_exited"]
 [connection signal="body_entered" from="CanvasLayer/RotatingSplitscreen/BottomScreenContainer/WorldRotationAreaA" to="Level/PlayerB" method="_on_world_rotation_area_entered"]

@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal player_dead
+
 @export var player_slot: int = -1
 @export var device_id: int = -1
 
@@ -7,6 +9,7 @@ var vulnerable: bool = false
 var direction: float = 1.0
 var sword_active: bool = false
 var sword_end_timer: int = 0
+var health: int = 3
 
 const SPEED = 32.0
 const JUMP_VELOCITY = 48.0
@@ -89,3 +92,10 @@ func _on_world_rotation_area_entered(area):
 
 func _on_world_rotation_area_exited(area):
 	vulnerable = false
+
+func _on_b_box_area_entered(area):
+	if area.is_in_group("Sword") and vulnerable:
+		health -= 1
+		if health == 0:
+			player_dead.emit()
+			queue_free()
